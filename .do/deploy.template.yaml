@@ -22,7 +22,7 @@ spec:
         - path: /
       instance_count: 1
       instance_size_slug: apps-s-1vcpu-2gb
-      run_command: mkdir -p /setup_data && touch /setup_data/ready && /crm/entrypoint.sh start_web_app
+      run_command: bash -lc "mkdir -p /setup_data && touch /setup_data/ready && /crm/entrypoint.sh start_web_app"
       envs:
         - key: ENV_VAR
           value: PROD
@@ -39,6 +39,15 @@ spec:
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
           value: redis
+        - key: ANALYTICAL_DB_HOST
+          value: ${analytical-db.HOSTNAME}
+        - key: ANALYTICAL_DB_PORT
+          value: ${analytical-db.PORT}
+        - key: ANALYTICAL_DB_USER
+          value: ${analytical-db.USERNAME}
+        - key: ANALYTICAL_DB_PASSWORD
+          value: ${analytical-db.PASSWORD}
+          type: SECRET
     - name: api
       image:
         registry_type: GHCR
@@ -50,7 +59,7 @@ spec:
         - path: /api/v1
       instance_count: 1
       instance_size_slug: apps-s-1vcpu-2gb
-      run_command: mkdir -p /setup_data && touch /setup_data/ready && /crm/entrypoint.sh start_api_app
+      run_command: bash -lc "mkdir -p /setup_data && touch /setup_data/ready && /crm/entrypoint.sh start_api_app"
       envs:
         - key: ENV_VAR
           value: PROD
@@ -67,6 +76,15 @@ spec:
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
           value: redis
+        - key: ANALYTICAL_DB_HOST
+          value: ${analytical-db.HOSTNAME}
+        - key: ANALYTICAL_DB_PORT
+          value: ${analytical-db.PORT}
+        - key: ANALYTICAL_DB_USER
+          value: ${analytical-db.USERNAME}
+        - key: ANALYTICAL_DB_PASSWORD
+          value: ${analytical-db.PASSWORD}
+          type: SECRET
   workers:
     - name: celery-worker
       image:
@@ -76,7 +94,7 @@ spec:
         tag: latest
       instance_count: 1
       instance_size_slug: apps-s-1vcpu-2gb
-      run_command: mkdir -p /setup_data && touch /setup_data/ready && /crm/entrypoint.sh start_worker
+      run_command: bash -lc "mkdir -p /setup_data && touch /setup_data/ready && /crm/entrypoint.sh start_worker"
       envs:
         - key: ENV_VAR
           value: PROD
@@ -93,6 +111,15 @@ spec:
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
           value: redis
+        - key: ANALYTICAL_DB_HOST
+          value: ${analytical-db.HOSTNAME}
+        - key: ANALYTICAL_DB_PORT
+          value: ${analytical-db.PORT}
+        - key: ANALYTICAL_DB_USER
+          value: ${analytical-db.USERNAME}
+        - key: ANALYTICAL_DB_PASSWORD
+          value: ${analytical-db.PASSWORD}
+          type: SECRET
     - name: celery-heavy-worker
       image:
         registry_type: GHCR
@@ -101,7 +128,7 @@ spec:
         tag: latest
       instance_count: 1
       instance_size_slug: apps-s-1vcpu-2gb
-      run_command: mkdir -p /setup_data && touch /setup_data/ready && /crm/entrypoint.sh start_heavy_worker
+      run_command: bash -lc "mkdir -p /setup_data && touch /setup_data/ready && /crm/entrypoint.sh start_heavy_worker"
       envs:
         - key: ENV_VAR
           value: PROD
@@ -118,6 +145,15 @@ spec:
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
           value: redis
+        - key: ANALYTICAL_DB_HOST
+          value: ${analytical-db.HOSTNAME}
+        - key: ANALYTICAL_DB_PORT
+          value: ${analytical-db.PORT}
+        - key: ANALYTICAL_DB_USER
+          value: ${analytical-db.USERNAME}
+        - key: ANALYTICAL_DB_PASSWORD
+          value: ${analytical-db.PASSWORD}
+          type: SECRET
     - name: redis
       image:
         registry_type: DOCKER_HUB
@@ -150,8 +186,21 @@ spec:
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
           value: redis
+        - key: ANALYTICAL_DB_HOST
+          value: ${analytical-db.HOSTNAME}
+        - key: ANALYTICAL_DB_PORT
+          value: ${analytical-db.PORT}
+        - key: ANALYTICAL_DB_USER
+          value: ${analytical-db.USERNAME}
+        - key: ANALYTICAL_DB_PASSWORD
+          value: ${analytical-db.PASSWORD}
+          type: SECRET
   databases:
     - name: db
+      engine: PG
+      production: false
+      version: "16"
+    - name: analytical-db
       engine: PG
       production: false
       version: "16"

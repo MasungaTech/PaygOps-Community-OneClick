@@ -14,8 +14,8 @@ spec:
     - name: web
       image:
         registry_type: GHCR
-        registry: ghcr.io
-        repository: masungatech/paygops-community
+        registry: masungatech
+        repository: paygops-community
         tag: latest
       http_port: 8000
       routes:
@@ -42,8 +42,8 @@ spec:
     - name: api
       image:
         registry_type: GHCR
-        registry: ghcr.io
-        repository: masungatech/paygops-community
+        registry: masungatech
+        repository: paygops-community
         tag: latest
       http_port: 6789
       routes:
@@ -71,8 +71,8 @@ spec:
     - name: celery-worker
       image:
         registry_type: GHCR
-        registry: ghcr.io
-        repository: masungatech/paygops-community
+        registry: masungatech
+        repository: paygops-community
         tag: latest
       instance_count: 1
       instance_size_slug: apps-s-1vcpu-2gb
@@ -96,8 +96,8 @@ spec:
     - name: celery-heavy-worker
       image:
         registry_type: GHCR
-        registry: ghcr.io
-        repository: masungatech/paygops-community
+        registry: masungatech
+        repository: paygops-community
         tag: latest
       instance_count: 1
       instance_size_slug: apps-s-1vcpu-2gb
@@ -130,8 +130,8 @@ spec:
       kind: PRE_DEPLOY
       image:
         registry_type: GHCR
-        registry: ghcr.io
-        repository: masungatech/paygops-community
+        registry: masungatech
+        repository: paygops-community
         tag: latest
       run_command: /crm/entrypoint.sh runtime_setup
       envs:

@@ -26,6 +26,14 @@ spec:
       envs:
         - key: ENV_VAR
           value: PROD
+        - key: MAIN_DB_NAME
+          value: db
+        - key: SMS_DB_NAME
+          value: db
+        - key: ACCOUNTING_DB_NAME
+          value: db
+        - key: AUDIT_DB_NAME
+          value: db
         - key: PAYG_URL
           value: ${APP_URL}
         - key: PG_HOST
@@ -37,16 +45,18 @@ spec:
         - key: PG_PASSWORD
           value: ${db.PASSWORD}
           type: SECRET
+        - key: PGSSLMODE
+          value: require
         - key: REDIS_SERVER_ADDRESS
           value: redis
         - key: ANALYTICAL_DB_HOST
-          value: ${analytical-db.HOSTNAME}
+          value: ${analytical_db.HOSTNAME}
         - key: ANALYTICAL_DB_PORT
-          value: ${analytical-db.PORT}
+          value: ${analytical_db.PORT}
         - key: ANALYTICAL_DB_USER
-          value: ${analytical-db.USERNAME}
+          value: ${analytical_db.USERNAME}
         - key: ANALYTICAL_DB_PASSWORD
-          value: ${analytical-db.PASSWORD}
+          value: ${analytical_db.PASSWORD}
           type: SECRET
     - name: api
       image:
@@ -63,6 +73,14 @@ spec:
       envs:
         - key: ENV_VAR
           value: PROD
+        - key: MAIN_DB_NAME
+          value: db
+        - key: SMS_DB_NAME
+          value: db
+        - key: ACCOUNTING_DB_NAME
+          value: db
+        - key: AUDIT_DB_NAME
+          value: db
         - key: PAYG_URL
           value: ${APP_URL}
         - key: PG_HOST
@@ -74,16 +92,18 @@ spec:
         - key: PG_PASSWORD
           value: ${db.PASSWORD}
           type: SECRET
+        - key: PGSSLMODE
+          value: require
         - key: REDIS_SERVER_ADDRESS
           value: redis
         - key: ANALYTICAL_DB_HOST
-          value: ${analytical-db.HOSTNAME}
+          value: ${analytical_db.HOSTNAME}
         - key: ANALYTICAL_DB_PORT
-          value: ${analytical-db.PORT}
+          value: ${analytical_db.PORT}
         - key: ANALYTICAL_DB_USER
-          value: ${analytical-db.USERNAME}
+          value: ${analytical_db.USERNAME}
         - key: ANALYTICAL_DB_PASSWORD
-          value: ${analytical-db.PASSWORD}
+          value: ${analytical_db.PASSWORD}
           type: SECRET
   workers:
     - name: celery-worker
@@ -98,6 +118,14 @@ spec:
       envs:
         - key: ENV_VAR
           value: PROD
+        - key: MAIN_DB_NAME
+          value: db
+        - key: SMS_DB_NAME
+          value: db
+        - key: ACCOUNTING_DB_NAME
+          value: db
+        - key: AUDIT_DB_NAME
+          value: db
         - key: PAYG_URL
           value: ${APP_URL}
         - key: PG_HOST
@@ -109,16 +137,18 @@ spec:
         - key: PG_PASSWORD
           value: ${db.PASSWORD}
           type: SECRET
+        - key: PGSSLMODE
+          value: require
         - key: REDIS_SERVER_ADDRESS
           value: redis
         - key: ANALYTICAL_DB_HOST
-          value: ${analytical-db.HOSTNAME}
+          value: ${analytical_db.HOSTNAME}
         - key: ANALYTICAL_DB_PORT
-          value: ${analytical-db.PORT}
+          value: ${analytical_db.PORT}
         - key: ANALYTICAL_DB_USER
-          value: ${analytical-db.USERNAME}
+          value: ${analytical_db.USERNAME}
         - key: ANALYTICAL_DB_PASSWORD
-          value: ${analytical-db.PASSWORD}
+          value: ${analytical_db.PASSWORD}
           type: SECRET
     - name: celery-heavy-worker
       image:
@@ -132,6 +162,14 @@ spec:
       envs:
         - key: ENV_VAR
           value: PROD
+        - key: MAIN_DB_NAME
+          value: db
+        - key: SMS_DB_NAME
+          value: db
+        - key: ACCOUNTING_DB_NAME
+          value: db
+        - key: AUDIT_DB_NAME
+          value: db
         - key: PAYG_URL
           value: ${APP_URL}
         - key: PG_HOST
@@ -143,16 +181,18 @@ spec:
         - key: PG_PASSWORD
           value: ${db.PASSWORD}
           type: SECRET
+        - key: PGSSLMODE
+          value: require
         - key: REDIS_SERVER_ADDRESS
           value: redis
         - key: ANALYTICAL_DB_HOST
-          value: ${analytical-db.HOSTNAME}
+          value: ${analytical_db.HOSTNAME}
         - key: ANALYTICAL_DB_PORT
-          value: ${analytical-db.PORT}
+          value: ${analytical_db.PORT}
         - key: ANALYTICAL_DB_USER
-          value: ${analytical-db.USERNAME}
+          value: ${analytical_db.USERNAME}
         - key: ANALYTICAL_DB_PASSWORD
-          value: ${analytical-db.PASSWORD}
+          value: ${analytical_db.PASSWORD}
           type: SECRET
     - name: redis
       image:
@@ -175,6 +215,14 @@ spec:
       envs:
         - key: ENV_VAR
           value: PROD
+        - key: MAIN_DB_NAME
+          value: db
+        - key: SMS_DB_NAME
+          value: db
+        - key: ACCOUNTING_DB_NAME
+          value: db
+        - key: AUDIT_DB_NAME
+          value: db
         - key: PG_HOST
           value: ${db.HOSTNAME}
         - key: PG_PORT
@@ -184,23 +232,25 @@ spec:
         - key: PG_PASSWORD
           value: ${db.PASSWORD}
           type: SECRET
+        - key: PGSSLMODE
+          value: require
         - key: REDIS_SERVER_ADDRESS
           value: redis
         - key: ANALYTICAL_DB_HOST
-          value: ${analytical-db.HOSTNAME}
+          value: ${analytical_db.HOSTNAME}
         - key: ANALYTICAL_DB_PORT
-          value: ${analytical-db.PORT}
+          value: ${analytical_db.PORT}
         - key: ANALYTICAL_DB_USER
-          value: ${analytical-db.USERNAME}
+          value: ${analytical_db.USERNAME}
         - key: ANALYTICAL_DB_PASSWORD
-          value: ${analytical-db.PASSWORD}
+          value: ${analytical_db.PASSWORD}
           type: SECRET
   databases:
     - name: db
       engine: PG
       production: false
       version: "16"
-    - name: analytical-db
+    - name: analytical_db
       engine: PG
       production: false
       version: "16"

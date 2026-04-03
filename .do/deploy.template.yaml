@@ -124,6 +124,22 @@ spec:
         - key: ANALYTICAL_DB_PASSWORD
           value: ${analyticaldb.PASSWORD}
           type: SECRET
+    - name: redis
+      image:
+        registry_type: DOCKER_HUB
+        registry: library
+        repository: redis
+        tag: "7-alpine"
+      internal_ports: [6379]
+      instance_count: 1
+      instance_size_slug: apps-s-1vcpu-1gb
+      health_check:
+        initial_delay_seconds: 10
+        period_seconds: 10
+        timeout_seconds: 5
+        success_threshold: 1
+        failure_threshold: 9
+        port: 6379
   workers:
     - name: celery-worker
       image:
@@ -217,14 +233,6 @@ spec:
         - key: ANALYTICAL_DB_PASSWORD
           value: ${analyticaldb.PASSWORD}
           type: SECRET
-    - name: redis
-      image:
-        registry_type: DOCKER_HUB
-        registry: library
-        repository: redis
-        tag: "7-alpine"
-      instance_count: 1
-      instance_size_slug: apps-s-1vcpu-1gb
   jobs:
     - name: runtime-setup
       kind: PRE_DEPLOY
@@ -259,8 +267,6 @@ spec:
           type: SECRET
         - key: PGSSLMODE
           value: require
-        - key: REDIS_SERVER_ADDRESS
-          value: redis
         - key: ANALYTICAL_DB_HOST
           value: ${analyticaldb.HOSTNAME}
         - key: ANALYTICAL_DB_PORT

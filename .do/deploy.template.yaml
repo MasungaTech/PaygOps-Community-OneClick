@@ -132,6 +132,7 @@ spec:
         tag: latest
       http_port: 8000
       health_check:
+        http_path: /openpaygo/health
         initial_delay_seconds: 45
         period_seconds: 10
         timeout_seconds: 10

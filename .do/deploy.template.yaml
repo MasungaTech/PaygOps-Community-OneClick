@@ -170,9 +170,9 @@ spec:
   databases:
     - name: db
       engine: PG
-      production: false
+      production: true
       version: "16"
     - name: redis
       engine: REDIS
-      production: false
+      production: true
       version: "7"

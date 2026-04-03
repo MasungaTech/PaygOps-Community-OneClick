@@ -157,8 +157,8 @@ spec:
     - name: redis
       image:
         registry_type: DOCKER_HUB
-        registry: docker.io
-        repository: library/redis
+        registry: library
+        repository: redis
         tag: "7-alpine"
       instance_count: 1
       instance_size_slug: apps-s-1vcpu-1gb

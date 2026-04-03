@@ -72,6 +72,7 @@ spec:
         - key: INITIAL_ADMIN_PASSWORD
           scope: RUN_TIME
           type: SECRET
+  workers:
     - name: celery-worker
       image:
         registry_type: GHCR

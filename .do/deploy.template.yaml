@@ -121,7 +121,7 @@ spec:
     - name: redis
       image:
         registry_type: DOCKER_HUB
-        registry: docker.io
+        registry: library
         repository: redis
         tag: "7"
       instance_size_slug: apps-s-1vcpu-1gb

@@ -28,7 +28,7 @@ spec:
           value: ${db.PASSWORD}
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
-          value: ${redis.HOSTNAME}
+          value: redis
         - key: SECRET_KEY
           scope: RUN_TIME
           type: SECRET
@@ -63,7 +63,7 @@ spec:
           value: ${db.PASSWORD}
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
-          value: ${redis.HOSTNAME}
+          value: redis
         - key: SECRET_KEY
           scope: RUN_TIME
           type: SECRET
@@ -96,7 +96,7 @@ spec:
           value: ${db.PASSWORD}
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
-          value: ${redis.HOSTNAME}
+          value: redis
         - key: SECRET_KEY
           scope: RUN_TIME
           type: SECRET
@@ -128,7 +128,7 @@ spec:
           value: ${db.PASSWORD}
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
-          value: ${redis.HOSTNAME}
+          value: redis
         - key: SECRET_KEY
           scope: RUN_TIME
           type: SECRET
@@ -137,6 +137,12 @@ spec:
         - key: INITIAL_ADMIN_PASSWORD
           scope: RUN_TIME
           type: SECRET
+    - name: redis
+      image:
+        registry_type: DOCKER_HUB
+        repository: redis
+        tag: "7"
+      instance_size_slug: apps-s-1vcpu-1gb
   jobs:
     - name: runtime-setup
       kind: PRE_DEPLOY
@@ -158,7 +164,7 @@ spec:
           value: ${db.PASSWORD}
           type: SECRET
         - key: REDIS_SERVER_ADDRESS
-          value: ${redis.HOSTNAME}
+          value: redis
         - key: SECRET_KEY
           scope: RUN_TIME
           type: SECRET
@@ -170,9 +176,5 @@ spec:
   databases:
     - name: db
       engine: PG
-      production: true
+      production: false
       version: "16"
-    - name: redis
-      engine: REDIS
-      production: true
-      version: "7"
